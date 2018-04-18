@@ -42,6 +42,17 @@ class Parent extends Component{
   render(){
     return(
            <div className="Parent">
+              <MyContext.Consumer>
+               {(context)=>(
+                  <React.Fragment>
+                     <button onClick={context.Plus}>Parent N+</button>
+                     <button onClick={context.Mines}>Parent N-</button>
+
+                     <button onClick={context.PlusT}>Parent T+</button>
+                     <button onClick={context.MinesT}>Parent T-</button>
+                  </React.Fragment>
+                )}
+             </MyContext.Consumer>
              <Child />
            </div>
       )
@@ -56,13 +67,11 @@ class Child extends Component{
              <MyContext.Consumer>
                {(context)=>(
                   <React.Fragment>
-                    <p>num: {context.state.num}</p>
-                     <p>time: {context.state.time}</p>
-                     <button onClick={context.Plus}>N+</button>
-                     <button onClick={context.Mines}>N-</button>
+                     <button onClick={context.Plus}>Child N+</button>
+                     <button onClick={context.Mines}>Child N-</button>
 
-                     <button onClick={context.PlusT}>T+</button>
-                     <button onClick={context.MinesT}>T-</button>
+                     <button onClick={context.PlusT}>Child T+</button>
+                     <button onClick={context.MinesT}>Child T-</button>
                   </React.Fragment>
                 )}
              </MyContext.Consumer>
@@ -77,7 +86,15 @@ class App extends Component {
     return (
       <MyProvider>
         <div className="App">
-         <Parent />
+           <MyContext.Consumer>
+                 {(context)=>(
+                    <React.Fragment>
+                      <p>num: {context.state.num}</p>
+                      <p>time: {context.state.time}</p>
+                    </React.Fragment>
+                  )}
+           </MyContext.Consumer>
+           <Parent />
         </div>
       </MyProvider>
 
